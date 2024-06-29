@@ -11,12 +11,12 @@ The patches are only targeted for Xbox One Wireless Controller connected via Blu
 # Games
 The files needed for specific games are in their specific folder in this repo.
 
-## Oxenfree (2014)
+## Oxenfree (2016)
 This patch fixes button and axes mappings for Xbox One Controller. Adding controller rumble haptics is a little more involved, so please refer to the blog above.
 
 1. Find `Oxenfree.app` in Finder (For Steam, you can right click on the game and select `Manage -> Browse local files`). Then, right click on it and select `Show Package Contents`.
 2. Navigate to `Contents/Resources/Data/Managed`.
-3. If you are using a Windows machine to run dnSpy, copy all the files in this folder to your Windows machine. If on MacOS, create a backup copy of only `Assembly-CSharp.dll`.
+3. If you are using a Windows machine to run dnSpy, copy all the files in this folder to your Windows machine. If running dnSpy on a Mac, create a backup copy of only `Assembly-CSharp.dll`.
 4. Open `CAssembly-Managed.dll` in dnSpy.
 5. On the tree view at the left side of the UI, navigate to `Assembly-CSharp.dll -> InControl`.
 6. Right click on `XboxOneMacProfile` class and select `Edit Class...`.
@@ -28,7 +28,7 @@ This patch fixes button and axes mappings for Xbox One Controller. Adding contro
 This patch fixes button and axes mappings for Xbox One Controller. The game has no support for controller rumble haptics.
 1. Find `Subnautica.app` in Finder (For Steam, you can right click on the game and select `Manage -> Browse local files`). Then, right click on it and select `Show Package Contents`.
 2. Navigate to `Contents/Resources/Data/Managed`.
-3. If you are using a Windows machine to run dnSpy, copy all the files in this folder to your Windows machine. If on MacOS, create a backup copy of only `Assembly-CSharp.dll`.
+3. If you are using a Windows machine to run dnSpy, copy all the files in this folder to your Windows machine. If running dnSpy on a Mac, create a backup copy of only `Assembly-CSharp.dll`.
 4. Open `CAssembly-Managed.dll` in dnSpy.
 5. On the tree view at the left side of the UI, navigate to `Assembly-CSharp.dll -> - -> GameInput`.
 6. Find the class method `GetKeyCodeAsInputName` and select `Edit Method...`.

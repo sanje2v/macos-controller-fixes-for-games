@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Gendarme;
 using Platform.Utils;
 using UnityEngine;
-using System.IO;
 
 // Token: 0x020002DC RID: 732
 public partial class GameInput : MonoBehaviour
@@ -58,7 +57,7 @@ public partial class GameInput : MonoBehaviour
 					}
 					else if (controllerLayout == GameInput.ControllerLayout.XboxOne)
 					{
-						// CAUTION: This patch is for XBox One Wireless Controller only
+						// NOTE: This patch is for XBox One Wireless Controller only
 						GameInput.axisValues[4] = UnityEngine.Input.GetAxis("ControllerAxis5");
 						GameInput.axisValues[5] = UnityEngine.Input.GetAxis("ControllerAxis6");
 

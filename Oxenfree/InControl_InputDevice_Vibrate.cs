@@ -1,5 +1,4 @@
 using System;
-//using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -48,25 +47,25 @@ namespace InControl
 		}
 
 		private const string GameControllerFrameworkWrapper = "GameControllerWrapper";
-        private const string CoreHapticsFrameworkWrapper = "CoreHapticsWrapper";
-
-        [DllImport(GameControllerFrameworkWrapper, CallingConvention=CallingConvention.Cdecl)]
-        private static extern GCGetConnectedControllersResponse GameControllerWrapper_GetConnectedControllers();
-
-		private static GCControllerHandle? GetController()
-		{
-			// This method assumes that the first controller that supports haptics is the current controller
-			var controllers = GameControllerWrapper_GetConnectedControllers().GetControllers();
-			foreach (var controller in controllers) {
-				if (controller.HasHaptics)
-					return controller;
+	        private const string CoreHapticsFrameworkWrapper = "CoreHapticsWrapper";
+	
+	        [DllImport(GameControllerFrameworkWrapper, CallingConvention=CallingConvention.Cdecl)]
+	        private static extern GCGetConnectedControllersResponse GameControllerWrapper_GetConnectedControllers();
+	
+			private static GCControllerHandle? GetController()
+			{
+				// This method assumes that the first controller that supports haptics is the current controller
+				var controllers = GameControllerWrapper_GetConnectedControllers().GetControllers();
+				foreach (var controller in controllers) {
+					if (controller.HasHaptics)
+						return controller;
+				}
+	
+				return null;
 			}
 
-			return null;
-		}
-
-        [DllImport(GameControllerFrameworkWrapper, CallingConvention=CallingConvention.Cdecl)]
-        private static extern IntPtr GameControllerWrapper_CreateHapticsEngine(string uniqueId, IntPtr onError);
+	        [DllImport(GameControllerFrameworkWrapper, CallingConvention=CallingConvention.Cdecl)]
+	        private static extern IntPtr GameControllerWrapper_CreateHapticsEngine(string uniqueId, IntPtr onError);
 
 		[DllImport(CoreHapticsFrameworkWrapper, CallingConvention=CallingConvention.Cdecl)]
 		private static extern void CoreHaptics_CHHapticEngine_Set_IsAutoShutdownEnabled(IntPtr enginePtr, bool isAutoShutdownEnabled);
@@ -74,31 +73,31 @@ namespace InControl
 		[DllImport(CoreHapticsFrameworkWrapper, CallingConvention=CallingConvention.Cdecl)]
 		private static extern void CoreHaptics_CHHapticEngine_Set_PlaysHapticsOnly(IntPtr enginePtr, bool playsHapticsOnly);
 
-        [DllImport(CoreHapticsFrameworkWrapper, CallingConvention=CallingConvention.Cdecl)]
-        private static extern void CoreHaptics_CHHapticEngine_Start(IntPtr enginePtr, IntPtr onError);
+	        [DllImport(CoreHapticsFrameworkWrapper, CallingConvention=CallingConvention.Cdecl)]
+	        private static extern void CoreHaptics_CHHapticEngine_Start(IntPtr enginePtr, IntPtr onError);
 
 		[DllImport(CoreHapticsFrameworkWrapper, CallingConvention=CallingConvention.Cdecl)]
 		private static extern void CoreHaptics_CHHapticEngine_PlayPatternFromJson(IntPtr enginePtr, string ahapJson, IntPtr onError);
 
 		#endregion
 
-        private const string HapticRumbleJSONTemplate = @"{
-            ""Version"": 1,
-            ""Pattern"": [
-                {
-                    ""Event"": {
-                        ""EventType"": ""HapticTransient"",
-                        ""EventParameters"": [
-                            {
-                                ""ParameterID"": ""HapticIntensity"",
-                                ""ParameterValue"": {intensity}
-                            }
-                        ],
-                        ""Time"": 0,
-                    }
-                }
-            ]
-        }";
+	        private const string HapticRumbleJSONTemplate = @"{
+	            ""Version"": 1,
+	            ""Pattern"": [
+	                {
+	                    ""Event"": {
+	                        ""EventType"": ""HapticTransient"",
+	                        ""EventParameters"": [
+	                            {
+	                                ""ParameterID"": ""HapticIntensity"",
+	                                ""ParameterValue"": {intensity}
+	                            }
+	                        ],
+	                        ""Time"": 0,
+	                    }
+	                }
+	            ]
+	        }";
 
 		private GCControllerHandle? controller;
 		private IntPtr enginePtr;

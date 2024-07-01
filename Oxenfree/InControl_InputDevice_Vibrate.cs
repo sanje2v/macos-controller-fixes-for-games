@@ -52,17 +52,17 @@ namespace InControl
 	        [DllImport(GameControllerFrameworkWrapper, CallingConvention=CallingConvention.Cdecl)]
 	        private static extern GCGetConnectedControllersResponse GameControllerWrapper_GetConnectedControllers();
 	
-			private static GCControllerHandle? GetController()
-			{
-				// This method assumes that the first controller that supports haptics is the current controller
-				var controllers = GameControllerWrapper_GetConnectedControllers().GetControllers();
-				foreach (var controller in controllers) {
-					if (controller.HasHaptics)
-						return controller;
-				}
-	
-				return null;
+		private static GCControllerHandle? GetController()
+		{
+			// This method assumes that the first controller that supports haptics is the current controller
+			var controllers = GameControllerWrapper_GetConnectedControllers().GetControllers();
+			foreach (var controller in controllers) {
+				if (controller.HasHaptics)
+					return controller;
 			}
+
+			return null;
+		}
 
 	        [DllImport(GameControllerFrameworkWrapper, CallingConvention=CallingConvention.Cdecl)]
 	        private static extern IntPtr GameControllerWrapper_CreateHapticsEngine(string uniqueId, IntPtr onError);

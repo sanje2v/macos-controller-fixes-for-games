@@ -122,7 +122,7 @@ namespace InControl
 					return;
 				}
 
-				// Set haptics some settings
+				// Set some haptics settings
 				CoreHaptics_CHHapticEngine_Set_IsAutoShutdownEnabled(this.enginePtr, false);
 				CoreHaptics_CHHapticEngine_Set_PlaysHapticsOnly(this.enginePtr, true);
 

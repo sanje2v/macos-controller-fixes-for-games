@@ -1,12 +1,12 @@
 # Introduction
 This repository contains fixes and patches for certain MacOS targeted games whose controller mappings don't work correctly.
 
-The patches are only targeted for Xbox One Wireless Controller connected via Bluetooth.
+The patches are only targeted for **Xbox One Wireless Controller** (unless specified otherwise) connected via Bluetooth.
 
 [**>** Blog](https://sanje2v.wordpress.com/2024/06/25/patching-oxenfree-to-fix-xbox-one-bluetooth-controller-key-mappings-haptics-for-macos/)
 
 # Tools used
-* [dnSpy](https://github.com/dnSpy/dnSpy/releases) - for editing .NET assembly. This program is designed for Windows but works well with Wine 9.11+DXVK for DirectX (use Heroic Launcher for easy setup) on a Mac.
+* [dnSpy](https://github.com/dnSpy/dnSpy/releases) - for editing .NET assembly. This program is designed for Windows but works well with Wine 9.11+DirectX (Tip: use Heroic Launcher's Add Game for easy setup) on a Mac.
 
 # Games
 The files needed for specific games are in their specific folder in this repo.
@@ -17,9 +17,9 @@ This patch fixes button and axes mappings for Xbox One Controller. Adding contro
 1. Find `Oxenfree.app` in Finder (For Steam, you can right click on the game and select `Manage -> Browse local files`). Then, right click on it and select `Show Package Contents`.
 2. Navigate to `Contents/Resources/Data/Managed`.
 3. If you are using a Windows machine to run dnSpy, copy all the files in this folder to your Windows machine. If running dnSpy on a Mac, create a backup copy of only `Assembly-CSharp.dll`.
-4. Open `CAssembly-Managed.dll` in dnSpy.
+4. Open `CAssembly-CSharp.dll` in dnSpy.
 5. On the tree view at the left side of the UI, navigate to `Assembly-CSharp.dll -> InControl`.
-6. Right click on `XboxOneMacProfile` class and select `Edit Class...`.
+6. Right click on `XboxOneMacProfile` class and select `Edit Class (C#)...`.
 7. Replace all the contents of the textbox with contents of the file from [Oxenfree/InControl_XboxOneMacProfile.cs](Oxenfree/InControl_XboxOneMacProfile.cs).
 8. Click on `Compile` and then save changes by going to `File -> Save Module...` on the menu bar.
 9. If on a Windows machine, replace only `CAssembly-CSharp.dll` in its original location on your Mac.
@@ -29,12 +29,12 @@ This patch fixes button and axes mappings for Xbox One Controller. The game has 
 1. Find `Subnautica.app` in Finder (For Steam, you can right click on the game and select `Manage -> Browse local files`). Then, right click on it and select `Show Package Contents`.
 2. Navigate to `Contents/Resources/Data/Managed`.
 3. If you are using a Windows machine to run dnSpy, copy all the files in this folder to your Windows machine. If running dnSpy on a Mac, create a backup copy of only `Assembly-CSharp.dll`.
-4. Open `CAssembly-Managed.dll` in dnSpy.
+4. Open `CAssembly-CSharp.dll` in dnSpy.
 5. On the tree view at the left side of the UI, navigate to `Assembly-CSharp.dll -> - -> GameInput`.
-6. Find the class method `GetKeyCodeAsInputName` and select `Edit Method...`.
+6. Find the class method `GetKeyCodeAsInputName` and select `Edit Method (C#)...`.
 7. Replace all the contents of the textbox with contents of the file from [Subnautica/GameInput_GetKeyCodeAsInputName.cs](Subnautica/GameInput_GetKeyCodeAsInputName.cs).
 8. Click on `Compile`.
-9. Find the class method `UpdateAxisValues` and select `Edit Method...`.
+9. Find the class method `UpdateAxisValues` and select `Edit Method (C#)...`.
 10. Replace all the contents of the textbox with contents of the file from [Subnautica/GameInput_UpdateAxisValues.cs](Subnautica/GameInput_UpdateAxisValues.cs).
 11. Click on `Compile` and then save changes by going to `File -> Save Module...` on the menu bar.
 12. If on a Windows machine, replace only `CAssembly-CSharp.dll` in its original location on your Mac.
